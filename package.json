@@ -1,0 +1,29 @@
+{
+    "name": "cordova-plugin-cardlink-emvau",
+    "version": "0.0.1-dev",
+    "description": "Cardlink EMVAU Plugin",
+    "cordova": {
+      "id": "cordova-plugin-cardlink-emvau",
+      "platforms": [
+        "android"
+      ]
+    },
+    "keywords": [
+      "cordova",
+      "cardlink"
+    ],
+    "scripts": {
+    },
+    "author": "EMVAU",
+    "license": "Apache-2.0",
+    "engines": {
+      "cordovaDependencies": {
+        "4.0.0": {
+          "cordova": ">100"
+        }
+      }
+    },
+    "devDependencies": {
+    }
+  }
+  

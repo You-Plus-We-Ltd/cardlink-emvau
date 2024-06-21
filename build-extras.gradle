@@ -1,0 +1,13 @@
+repositories {
+    maven {
+        url "https://maven.sharpmind.de/artifactory/libs-cardlink"
+        credentials {
+            username "sm-cardlink"
+            password "SM-cardlink1"
+        }
+    }
+}
+
+dependencies {
+    implementation "de.sharpmind.cardlink:cardlink-sdk-android:0.1.4"
+}

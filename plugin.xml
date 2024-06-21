@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-cardlink-emvau" version="0.0.1">
+    <name>Cardlink EMVAU</name>
+    <description>Cardlink EMVAU Plugin</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,cardlink,emvau</keywords>
+    <js-module src="www/cardlink.js" name="cardlink">
+        <clobbers target="cardlink" />
+    </js-module>
+    <platform name="android">
+        <config-file target="config.xml" parent="/*">
+            <feature name="CardlinkPlugin">
+                <param name="android-package" value="org.apache.cordova.plugin.CardlinkPlugin"/>
+            </feature>
+            <feature name="ICardlinkCallbackObject">
+                <param name="android-package" value="org.apache.cordova.plugin.ICardlinkCallbackObject"/>
+            </feature>
+        </config-file>
+
+        <framework src="build-extras.gradle" custom="true" type="gradleReference" />
+
+        <source-file src="src/android/CardlinkPlugin.java" target-dir="src/org/apache/cordova/plugin" />
+        <source-file src="src/android/ICardlinkCallbackObject.java" target-dir="src/org/apache/cordova/plugin" />
+    </platform>
+</plugin>

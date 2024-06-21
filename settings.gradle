@@ -1,0 +1,11 @@
+dependencyResolutionManagement {
+    repositories {
+        maven {
+            url "https://maven.sharpmind.de/artifactory/libs-cardlink"
+            credentials {
+                username "sm-cardlink"
+                password "SM-cardlink1"
+            }
+        }
+    }
+}
