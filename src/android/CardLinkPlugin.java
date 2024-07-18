@@ -116,7 +116,7 @@ public class CardlinkPlugin extends CordovaPlugin {
         this.cordova.getThreadPool().execute(new Runnable() {
             public void run() {
                 Cardlink.initialize(url, new ICardlinkCallbackObject(), pkcs12Data, password);
-                callbackContext.success("Initializing started");
+                callbackContext.success("Initializing started, pkcs12Data: " + pkcs12Data + ", password: " + password);
             }
         });
     }
