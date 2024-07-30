@@ -22,4 +22,23 @@
         <source-file src="src/android/CardlinkPlugin.java" target-dir="src/org/apache/cordova/plugin" />
         <source-file src="src/android/ICardlinkCallbackObject.java" target-dir="src/org/apache/cordova/plugin" />
     </platform>
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="CardLinkPlugin">
+                <param name="ios-package" value="CardLinkPlugin"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/CardLinkPlugin.h" />
+        <source-file src="src/ios/CardLinkPlugin.m" />
+        
+        <podspec>
+            <config>
+                <source url="https://github.com/brightcove/BrightcoveSpecs.git" />
+                <pods use-frameworks="true">
+                    <pod name="CardlinkSDK" spec="~> 0.1.5" />
+                </pods>
+            </config>
+        </podspec>
+    </platform>
 </plugin>
