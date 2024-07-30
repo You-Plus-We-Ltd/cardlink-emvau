@@ -34,7 +34,7 @@
         
         <podspec>
             <config>
-                <source url="https://github.com/brightcove/BrightcoveSpecs.git" />
+                <source url="https://git.sharpmind.de/cardlink/CardlinkSDK" />
                 <pods use-frameworks="true">
                     <pod name="CardlinkSDK" spec="~> 0.1.5" />
                 </pods>
