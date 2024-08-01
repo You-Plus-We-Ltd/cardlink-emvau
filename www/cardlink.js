@@ -48,6 +48,13 @@ function Cardlink() {
             cordova.exec(resolve, reject, "CardlinkPlugin", "shutdown", []);
         });
     }
+    
+    this.updateNfcMessage = function (message) {
+        console.log("message", message);
+        return new Promise((resolve, reject) => {
+            cordova.exec(resolve, reject, "CardlinkPlugin", "updateNfcMessage", [message]);
+        });
+    }
 
     this.onStateChanged = function () {
         return new Promise((resolve, reject) => {

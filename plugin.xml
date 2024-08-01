@@ -32,6 +32,9 @@
         <header-file src="src/ios/CardLinkPlugin.h" />
         <source-file src="src/ios/CardLinkPlugin.m" />
         
+        <header-file src="src/ios/ObjCCardlinkDelegate.h" />
+        <source-file src="src/ios/ObjCCardlinkDelegate.m" />
+        
         <podspec>
             <config>
                 <source url="https://git.sharpmind.de/cardlink/CocoaPodSpecs" />
