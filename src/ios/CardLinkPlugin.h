@@ -26,7 +26,6 @@
 
 + (void)setOnErrorCallbackId:(NSString*) newOnErrorCallbackId;
 
-- (void)echo:(CDVInvokedUrlCommand*)command;
 
 - (void)initialize:(CDVInvokedUrlCommand*)command;
 
