@@ -131,7 +131,14 @@ static NSString* OnErrorCallbackId = nil;
 {
     [self.commandDelegate runInBackground:^{
         CDVPluginResult* pluginResult = nil;
-        NSString* smsToken = [command.arguments objectAtIndex:0];
+        NSNumber* smsTokenNumber = [command.arguments objectAtIndex:0];
+        NSString* smsToken = nil;
+        
+        if (smsTokenNumber != nil) {
+            smsToken = [smsTokenNumber stringValue];
+        } else {
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+        }
         
         if (smsToken != nil && [smsToken length] > 0) {
             [CSDKCardlink.shared verifySmsToken:smsToken];
