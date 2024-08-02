@@ -1,17 +1,14 @@
-window.echo = function(str, callback) {
-    cordova.exec(callback, function(err) {
-        console.log("Error: " + err);
-        callback(err);
-    }, "CardlinkPlugin", "echo", [str]);
-};
-
 function Cardlink() {
     this.isNfcHardwareAvailable = function (callback, errorCallback) {
-        cordova.exec(callback, errorCallback, "CardlinkPlugin", "isNfcHardwareAvailable", []);
+        if (device.platform == 'Android') {
+            cordova.exec(callback, errorCallback, "CardlinkPlugin", "isNfcHardwareAvailable", []);
+        }
     };
     
     this.isNfcEnabled = function (callback, errorCallback) {
-        cordova.exec(callback, errorCallback, "CardlinkPlugin", "isNfcEnabled", []);
+        if (device.platform == 'Android') {
+            cordova.exec(callback, errorCallback, "CardlinkPlugin", "isNfcEnabled", []);
+        }
     };
 
     this.initialize = function (url, pkcs12Data, password) {
@@ -50,10 +47,12 @@ function Cardlink() {
     }
     
     this.updateNfcMessage = function (message) {
-        console.log("message", message);
-        return new Promise((resolve, reject) => {
-            cordova.exec(resolve, reject, "CardlinkPlugin", "updateNfcMessage", [message]);
-        });
+        if (device.platform == 'iOS') {
+            console.log("message", message);
+            return new Promise((resolve, reject) => {
+                cordova.exec(resolve, reject, "CardlinkPlugin", "updateNfcMessage", [message]);
+            });
+        }
     }
 
     this.onStateChanged = function () {
