@@ -3,7 +3,30 @@
 #import <Cordova/CDVPlugin.h>
 #import <CardlinkSDK/CardlinkSDK.h>
 
+static CardLinkPlugin* cardLinkPluginObject = nil;
+static NSString* OnStateChangedCallbackId = nil;
+
 @implementation CardLinkPlugin
+
++ (CardLinkPlugin*)cardLinkPluginObject {
+    return cardLinkPluginObject;
+}
+
++ (void)setCardLinkPluginObject:(CardLinkPlugin*)newCardLinkPluginObject {
+    if (cardLinkPluginObject != newCardLinkPluginObject) {
+        cardLinkPluginObject = newCardLinkPluginObject;
+    }
+}
+
++ (NSString*)onStateChangedCallbackId {
+    return OnStateChangedCallbackId;
+}
+
++ (void)setStateChangedCallbackId:(NSString*)newOnStateChangedCallbackId {
+    if (OnStateChangedCallbackId != newOnStateChangedCallbackId) {
+        OnStateChangedCallbackId = newOnStateChangedCallbackId;
+    }
+}
 
 - (void)echo:(CDVInvokedUrlCommand*)command
 {
@@ -122,6 +145,12 @@
         
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }];
+}
+
+- (void)onStateChanged:(CDVInvokedUrlCommand *)command
+{
+    [CardLinkPlugin setCardLinkPluginObject:self];
+    [CardLinkPlugin setStateChangedCallbackId:command.callbackId];
 }
 
 @end
