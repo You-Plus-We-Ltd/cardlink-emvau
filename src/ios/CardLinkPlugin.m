@@ -5,26 +5,82 @@
 
 static CardLinkPlugin* cardLinkPluginObject = nil;
 static NSString* OnStateChangedCallbackId = nil;
+static NSString* OnProgressUpdateCallbackId = nil;
+static NSString* OnPrescriptionTokensCallbackId = nil;
+static NSString* OnPrescriptionBundlesCallbackId = nil;
+static NSString* OnErrorCallbackId = nil;
 
 @implementation CardLinkPlugin
 
-+ (CardLinkPlugin*)cardLinkPluginObject {
++ (CardLinkPlugin*)cardLinkPluginObject
+{
     return cardLinkPluginObject;
 }
 
-+ (void)setCardLinkPluginObject:(CardLinkPlugin*)newCardLinkPluginObject {
++ (void)setCardLinkPluginObject:(CardLinkPlugin*)newCardLinkPluginObject
+{
     if (cardLinkPluginObject != newCardLinkPluginObject) {
         cardLinkPluginObject = newCardLinkPluginObject;
     }
 }
 
-+ (NSString*)onStateChangedCallbackId {
++ (NSString*)onStateChangedCallbackId
+{
     return OnStateChangedCallbackId;
 }
 
-+ (void)setStateChangedCallbackId:(NSString*)newOnStateChangedCallbackId {
++ (void)setOnStateChangedCallbackId:(NSString*)newOnStateChangedCallbackId
+{
     if (OnStateChangedCallbackId != newOnStateChangedCallbackId) {
         OnStateChangedCallbackId = newOnStateChangedCallbackId;
+    }
+}
+
++ (NSString*)onProgressUpdateCallbackId
+{
+    return OnProgressUpdateCallbackId;
+}
+
++ (void)setOnProgressUpdateCallbackId:(NSString*)newOnProgressUpdateCallbackId
+{
+    if (OnProgressUpdateCallbackId != newOnProgressUpdateCallbackId) {
+        OnProgressUpdateCallbackId = newOnProgressUpdateCallbackId;
+    }
+}
+
++ (NSString*)onPrescriptionTokensCallbackId
+{
+    return  OnPrescriptionTokensCallbackId;
+}
+
++ (void)setOnPrescriptionTokensCallbackId:(NSString*)newOnPrescriptionTokensCallbackId
+{
+    if (OnPrescriptionTokensCallbackId != newOnPrescriptionTokensCallbackId) {
+        OnPrescriptionTokensCallbackId = newOnPrescriptionTokensCallbackId;
+    }
+}
+
++ (NSString*)onPrescriptionBundlesCallbackId
+{
+    return  OnPrescriptionBundlesCallbackId;
+}
+
++ (void)setOnPrescriptionBundlesCallbackId:(NSString*)newOnPrescriptionBundlesCallbackId
+{
+    if (OnPrescriptionBundlesCallbackId != newOnPrescriptionBundlesCallbackId) {
+        OnPrescriptionBundlesCallbackId = newOnPrescriptionBundlesCallbackId;
+    }
+}
+
++ (NSString*) onErrorCallbackId
+{
+    return OnErrorCallbackId;
+}
+
++ (void)setOnErrorCallbackId:(NSString*)newOnErrorCallbackId
+{
+    if (OnErrorCallbackId != newOnErrorCallbackId) {
+        OnErrorCallbackId = newOnErrorCallbackId;
     }
 }
 
@@ -150,7 +206,31 @@ static NSString* OnStateChangedCallbackId = nil;
 - (void)onStateChanged:(CDVInvokedUrlCommand *)command
 {
     [CardLinkPlugin setCardLinkPluginObject:self];
-    [CardLinkPlugin setStateChangedCallbackId:command.callbackId];
+    [CardLinkPlugin setOnStateChangedCallbackId:command.callbackId];
+}
+
+- (void)onProgressUpdate:(CDVInvokedUrlCommand *)command
+{
+    [CardLinkPlugin setCardLinkPluginObject:self];
+    [CardLinkPlugin setOnProgressUpdateCallbackId:command.callbackId];
+}
+
+- (void)onPrescriptionTokens:(CDVInvokedUrlCommand *)command
+{
+    [CardLinkPlugin setCardLinkPluginObject:self];
+    [CardLinkPlugin setOnProgressUpdateCallbackId:command.callbackId];
+}
+
+- (void)onPrescriptionBundles:(CDVInvokedUrlCommand *)command
+{
+    [CardLinkPlugin setCardLinkPluginObject:self];
+    [CardLinkPlugin setOnProgressUpdateCallbackId:command.callbackId];
+}
+
+- (void)onError:(CDVInvokedUrlCommand *)command
+{
+    [CardLinkPlugin setCardLinkPluginObject:self];
+    [CardLinkPlugin setOnErrorCallbackId:command.callbackId];
 }
 
 @end
