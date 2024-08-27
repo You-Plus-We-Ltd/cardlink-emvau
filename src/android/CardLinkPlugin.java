@@ -112,7 +112,7 @@ public class CardlinkPlugin extends CordovaPlugin {
 
             return true;
         } else if (action.equals("setLogLevel")) {
-            Boolean logLevelString = args.getBoolean(0);
+            Boolean logLevelString = args.getString(0);
 
             if (logLevelString != null) {
             LogLevel logLevel = LogLevel.valueOf(logLevelString);
