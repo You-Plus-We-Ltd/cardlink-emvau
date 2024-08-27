@@ -212,7 +212,7 @@ public class CardlinkPlugin extends CordovaPlugin {
     private void setSmsEnabled(Boolean enabled, CallbackContext callbackContext) {
         this.cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                Cardlink.setSmsEnabled("enabled " + enabled);
+                Cardlink.setSmsEnabled(enabled);
                 callbackContext.success();
             }
         });
@@ -221,7 +221,7 @@ public class CardlinkPlugin extends CordovaPlugin {
     private void setDebug(Boolean enabled, CallbackContext callbackContext) {
         this.cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                Cardlink.setDebug("enabled " + enabled);
+                Cardlink.setDebug(enabled);
                 callbackContext.success();
             }
         });
@@ -231,7 +231,7 @@ public class CardlinkPlugin extends CordovaPlugin {
         this.cordova.getThreadPool().execute(new Runnable() {
             public void run() {
                 Cardlink.setLogLevel(logLevel);
-                callbackContext.success("logLevel " + logLevel);
+                callbackContext.success(logLevel);
             }
         });
     }
