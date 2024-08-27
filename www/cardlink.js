@@ -93,18 +93,21 @@ function Cardlink() {
 
     this.setSmsEnabled = function (enabled) {
         return new Promise((resolve, reject) => {
+            console.log("enabled", enabled);
             cordova.exec(resolve, reject, "CardlinkPlugin", "setSmsEnabled", [enabled]);
         });
     }
 
     this.setDebug = function (enabled) {
         return new Promise((resolve, reject) => {
+            console.log("enabled", enabled);
             cordova.exec(resolve, reject, "CardlinkPlugin", "setDebug", [enabled]);
         });
     }
 
     this.setLogLevel = function (logLevel) {
         return new Promise((resolve, reject) => {
+            console.log("logLevel", logLevel);
             cordova.exec(resolve, reject, "CardlinkPlugin", "setLogLevel", [logLevel]);
         });
     }
