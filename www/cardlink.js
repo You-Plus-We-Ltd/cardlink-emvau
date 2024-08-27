@@ -40,6 +40,12 @@ function Cardlink() {
         });
     }
 
+    this.stopScan = function () {
+        return new Promise((resolve, reject) => {
+            cordova.exec(resolve, reject, "CardlinkPlugin", "stopScan", []);
+        });
+    }
+
     this.shutdown = function () {
         return new Promise((resolve, reject) => {
             cordova.exec(resolve, reject, "CardlinkPlugin", "shutdown", []);
@@ -82,6 +88,24 @@ function Cardlink() {
     this.onError = function () {
         return new Promise((resolve, reject) => {
             cordova.exec(resolve, reject, "CardlinkPlugin", "onError", []);
+        });
+    }
+
+    this.setSmsEnabled = function (enabled) {
+        return new Promise((resolve, reject) => {
+            cordova.exec(resolve, reject, "CardlinkPlugin", "setSmsEnabled", [enabled]);
+        });
+    }
+
+    this.setDebug = function (enabled) {
+        return new Promise((resolve, reject) => {
+            cordova.exec(resolve, reject, "CardlinkPlugin", "setDebug", [enabled]);
+        });
+    }
+
+    this.setLogLevel = function (logLevel) {
+        return new Promise((resolve, reject) => {
+            cordova.exec(resolve, reject, "CardlinkPlugin", "setLogLevel", [logLevel]);
         });
     }
 }

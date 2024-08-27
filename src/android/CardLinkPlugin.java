@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import de.akquinet.health.service.cardlink.sdk.Cardlink;
+import de.akquinet.health.service.cardlink.sdk.LogLevel;
 import org.apache.cordova.plugin.ICardlinkCallbackObject;
 
 /**
@@ -69,6 +70,9 @@ public class CardlinkPlugin extends CordovaPlugin {
             }
             
             return true;
+        } else if (action.equals("stopScan")) {
+            this.stopScan(callbackContext);
+            return true;
         } else if (action.equals("shutdown")) {
             this.shutdown(callbackContext);
             return true;
@@ -86,6 +90,37 @@ public class CardlinkPlugin extends CordovaPlugin {
             return true;
         } else if (action.equals("onError")) {
             this.onError(callbackContext);
+            return true;
+        } else if (action.equals("setSmsEnabled")) {
+            Boolean enabled = args.getBoolean(0);
+
+            if (enabled != null) {
+                this.setSmsEnabled(enabled, callbackContext);
+            } else {
+                callbackContext.error("Enter enabled parameter");
+            }
+            
+            return true;
+        } else if (action.equals("setDebug")) {
+            Boolean enabled = args.getBoolean(0);
+
+            if (enabled != null) {
+                this.setDebug(enabled, callbackContext);
+            } else {
+                callbackContext.error("Enter enabled parameter");
+            }
+
+            return true;
+        } else if (action.equals("setLogLevel")) {
+            Boolean logLevelString = args.getBoolean(0);
+
+            if (logLevelString != null) {
+            LogLevel logLevel = LogLevel.valueOf(logLevelString);
+                this.setLogLevel(logLevel, callbackContext);
+            } else {
+                callbackContext.error("Enter log level");
+            }
+
             return true;
         }
         
@@ -136,6 +171,15 @@ public class CardlinkPlugin extends CordovaPlugin {
         });
     }
 
+    private void stopScan(CallbackContext callbackContext) {
+        this.cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                Cardlink.stopScan();
+                callbackContext.success();
+            }
+        });
+    }
+
     private void shutdown(CallbackContext callbackContext) {
         this.cordova.getThreadPool().execute(new Runnable() {
             public void run() {
@@ -163,5 +207,32 @@ public class CardlinkPlugin extends CordovaPlugin {
     
     private void onError(CallbackContext callbackContext) {
         CardlinkPlugin.onErrorCallback = callbackContext;
+    }
+
+    private void setSmsEnabled(Boolean enabled, CallbackContext callbackContext) {
+        this.cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                Cardlink.setSmsEnabled(enabled);
+                callbackContext.success();
+            }
+        });
+    }
+
+    private void setDebug(Boolean enabled, CallbackContext callbackContext) {
+        this.cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                Cardlink.setDebug(enabled);
+                callbackContext.success();
+            }
+        });
+    }
+
+    private  void setLogLevel(LogLevel logLevel, CallbackContext callbackContext) {
+        this.cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                Cardlink.setLogLevel(logLevel);
+                callbackContext.success();
+            }
+        });
     }
 }
