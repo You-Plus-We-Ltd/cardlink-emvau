@@ -39,7 +39,7 @@
             <config>
                 <source url="https://git.sharpmind.de/cardlink/CocoaPodSpecs" />
                 <pods use-frameworks="false">
-                    <pod name="CardlinkSDK" spec="0.1.5" />
+                    <pod name="CardlinkSDK" spec="1.0.0" />
                 </pods>
             </config>
         </podspec>
