@@ -112,16 +112,14 @@ public class CardlinkPlugin extends CordovaPlugin {
 
             return true;
         } else if (action.equals("setLogLevel")) {
-            // String logLevelString = args.getString(0);
+            String logLevelString = args.getString(0);
 
-            // if (logLevelString != null) {
-            // LogLevel logLevel = LogLevel.valueOf(logLevelString);
-            //     this.setLogLevel(logLevel, callbackContext);
-            // } else {
-            //     callbackContext.error("Enter log level");
-            // }
-
-            callbackContext.success("test setLogLevel");
+            if (logLevelString != null) {
+            LogLevel logLevel = LogLevel.valueOf(logLevelString);
+                this.setLogLevel(logLevel, callbackContext);
+            } else {
+                callbackContext.error("Enter log level");
+            }
 
             return true;
         }
@@ -214,9 +212,8 @@ public class CardlinkPlugin extends CordovaPlugin {
     private void setSmsEnabled(Boolean enabled, CallbackContext callbackContext) {
         this.cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                // Cardlink.setSmsEnabled(enabled);
-                // callbackContext.success("setSmsEnabled enabled" + enabled);
-                callbackContext.success("test setSmsEnabled");
+                Cardlink.setSmsEnabled(enabled);
+                callbackContext.success("setSmsEnabled enabled" + enabled);
             }
         });
     }
@@ -224,19 +221,18 @@ public class CardlinkPlugin extends CordovaPlugin {
     private void setDebug(Boolean enabled, CallbackContext callbackContext) {
         this.cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                // Cardlink.setDebug(enabled);
-                // callbackContext.success("setDebug enabled" + enabled);
-                callbackContext.success("test setDebug");
+                Cardlink.setDebug(enabled);
+                callbackContext.success("setDebug enabled" + enabled);
             }
         });
     }
 
-    // private  void setLogLevel(LogLevel logLevel, CallbackContext callbackContext) {
-    //     this.cordova.getThreadPool().execute(new Runnable() {
-    //         public void run() {
-    //             Cardlink.setLogLevel(logLevel);
-    //             callbackContext.success("logLevel" + logLevel);
-    //         }
-    //     });
-    // }
+    private  void setLogLevel(LogLevel logLevel, CallbackContext callbackContext) {
+        this.cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                Cardlink.setLogLevel(logLevel);
+                callbackContext.success("logLevel" + logLevel);
+            }
+        });
+    }
 }
