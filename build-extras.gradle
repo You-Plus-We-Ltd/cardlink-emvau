@@ -9,5 +9,5 @@ repositories {
 }
 
 dependencies {
-    implementation "de.sharpmind.cardlink:cardlink-sdk-android:1.0.0"
+    implementation "de.sharpmind.cardlink:cardlink-sdk-android:1.0.1"
 }
