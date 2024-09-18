@@ -4,7 +4,7 @@ dependencyResolutionManagement {
             url "https://maven.sharpmind.de/artifactory/libs-cardlink"
             credentials {
                 username "sm-cardlink"
-                password "SM-cardlink1"
+                password "nosvax-4nupvu-dYbfam"
             }
         }
     }
