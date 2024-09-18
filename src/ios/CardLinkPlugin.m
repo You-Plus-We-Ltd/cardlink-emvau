@@ -89,11 +89,10 @@ static NSString* OnErrorCallbackId = nil;
     [self.commandDelegate runInBackground:^{
         CDVPluginResult* pluginResult = nil;
         NSString* cardlinkServerUrl = [command.arguments objectAtIndex:0];
-        NSString* pkcs12Data = [command.arguments objectAtIndex:1];
-        NSString* password = [command.arguments objectAtIndex:2];
+        NSString* authToken = [command.arguments objectAtIndex:1];
         
-        if (cardlinkServerUrl != nil && [cardlinkServerUrl length] > 0 && pkcs12Data != nil && [pkcs12Data length] > 0 && password != nil && [password length] > 0) {
-            [CSDKCardlink.shared initializeWithCardlinkServerUrl:cardlinkServerUrl delegate:[[ObjCCardlinkDelegate alloc] init] pkcs12Data:pkcs12Data password:password];
+        if (cardlinkServerUrl != nil && [cardlinkServerUrl length] > 0 && authToken != nil && [authToken length] > 0) {
+            [CSDKCardlink.shared initializeWithCardlinkServerUrl:cardlinkServerUrl delegate:[[ObjCCardlinkDelegate alloc] init] authToken:authToken];
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"init started"];
         } else {
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
