@@ -11,9 +11,9 @@ function Cardlink() {
         }
     };
 
-    this.initialize = function (url, pkcs12Data, password) {
+    this.initialize = function (url, authToken) {
         return new Promise((resolve, reject) => {
-            cordova.exec(resolve, reject, "CardlinkPlugin", "initialize", [url, pkcs12Data, password]);
+            cordova.exec(resolve, reject, "CardlinkPlugin", "initialize", [url, authToken]);
         });
     }
 

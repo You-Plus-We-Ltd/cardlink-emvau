@@ -31,8 +31,8 @@ public class CardlinkPlugin extends CordovaPlugin {
             this.isNfcEnabled(callbackContext);
             return true;
         } else if (action.equals("initialize")) {
-            if  (args.getString(0) != null && args.getString(1) != null && args.getString(2) != null) {
-                this.initialize(args.getString(0), callbackContext, args.getString(1), args.getString(2));
+            if  (args.getString(0) != null && args.getString(1) != null) {
+                this.initialize(args.getString(0), callbackContext, args.getString(1));
             } else {
                 callbackContext.error("Enter url");
             }
@@ -135,11 +135,11 @@ public class CardlinkPlugin extends CordovaPlugin {
         callbackContext.success(Cardlink.isNfcEnabled(this.cordova.getActivity()) ? 1 : 0);
     }
 
-    private void initialize(String url, CallbackContext callbackContext, String pkcs12Data, String password) {
+    private void initialize(String url, CallbackContext callbackContext, String authToken) {
         this.cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                Cardlink.initialize(url, new ICardlinkCallbackObject(), pkcs12Data, password);
-                callbackContext.success("Initializing started, pkcs12Data: " + pkcs12Data + ", password: " + password);
+                Cardlink.initialize(url, new ICardlinkCallbackObject(), authToken);
+                callbackContext.success("Initializing started, url: " + url + ", authToken: " + authToken);
             }
         });
     }
