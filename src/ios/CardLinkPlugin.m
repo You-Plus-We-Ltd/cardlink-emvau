@@ -264,9 +264,22 @@ static NSString* OnErrorCallbackId = nil;
     [self.commandDelegate runInBackground:^{
     CDVPluginResult* pluginResult = nil;
     NSString* logLevel = [command.arguments objectAtIndex:0];
-
     if (logLevel != nil && [logLevel length] > 0) {
-        [CSDKCardlink.shared setLogLevel:logLevel];
+        
+       if ([logLevel isEqual:@"NONE"]) {
+           [CSDKCardlink.shared setLogLevel:CSDKLogLevel.none];
+       } else if ([logLevel isEqual:@"DEBUG"]) {
+           [CSDKCardlink.shared setLogLevel:CSDKLogLevel.debug];
+       } else if ([logLevel isEqual:@"ERROR"]) {
+           [CSDKCardlink.shared setLogLevel:CSDKLogLevel.error];
+       } else if ([logLevel isEqual:@"WARNING"]) {
+           [CSDKCardlink.shared setLogLevel:CSDKLogLevel.warning];
+       } else if ([logLevel isEqual:@"INFO"]) {
+           [CSDKCardlink.shared setLogLevel:CSDKLogLevel.info];
+       } else if ([logLevel isEqual:@"DEBUG"]) {
+           [CSDKCardlink.shared setLogLevel:CSDKLogLevel.debug];
+       }
+        
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"log level value set"];
     } else {
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
