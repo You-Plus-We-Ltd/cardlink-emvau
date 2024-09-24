@@ -259,4 +259,21 @@ static NSString* OnErrorCallbackId = nil;
     }];
 }
 
+- (void)setLogLevel:(CDVInvokedUrlCommand *)command
+{
+    [self.commandDelegate runInBackground:^{
+    CDVPluginResult* pluginResult = nil;
+    NSString* logLevel = [command.arguments objectAtIndex:0];
+
+    if (logLevel != nil && [logLevel length] > 0) {
+        [CSDKCardlink.shared setLogLevel:logLevel];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"log level value set"];
+    } else {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+    }
+
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }];
+}
+
 @end

@@ -50,4 +50,6 @@
 
 - (void)setDebug:(CDVInvokedUrlCommand*)command;
 
+- (void)setLogLevel:(CDVInvokedUrlCommand*)command;
+
 @end
