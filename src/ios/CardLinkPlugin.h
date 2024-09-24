@@ -26,7 +26,6 @@
 
 + (void)setOnErrorCallbackId:(NSString*) newOnErrorCallbackId;
 
-
 - (void)initialize:(CDVInvokedUrlCommand*)command;
 
 - (void)requestSmsToken:(CDVInvokedUrlCommand*)command;
@@ -46,5 +45,7 @@
 - (void)onPrescriptionBundles:(CDVInvokedUrlCommand*)command;
 
 - (void)onError:(CDVInvokedUrlCommand*)command;
+
+- (void)setSmsEnabled:(CDVInvokedUrlCommand*)command;
 
 @end
