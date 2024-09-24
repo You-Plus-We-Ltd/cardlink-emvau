@@ -48,4 +48,6 @@
 
 - (void)setSmsEnabled:(CDVInvokedUrlCommand*)command;
 
+- (void)setDebug:(CDVInvokedUrlCommand*)command;
+
 @end

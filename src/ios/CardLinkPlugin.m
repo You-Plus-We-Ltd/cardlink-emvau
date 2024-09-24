@@ -232,8 +232,25 @@ static NSString* OnErrorCallbackId = nil;
     BOOL enabled = [command.arguments objectAtIndex:0];
 
     if (enabled != nil) {
-        CSDKCardlink.smsEnabled = enabled;
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"sms enabled set" + enabled];
+        CSDKCardlink.shared.smsEnabled = enabled;
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"sms enabled value set"];
+    } else {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+    }
+
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }];
+}
+
+- (void)setDebug:(CDVInvokedUrlCommand *)command
+{
+    [self.commandDelegate runInBackground:^{
+    CDVPluginResult* pluginResult = nil;
+    BOOL enabled = [command.arguments objectAtIndex:0];
+
+    if (enabled != nil) {
+        [CSDKCardlink.shared setDebug:enabled];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"debug value set"];
     } else {
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
     }
