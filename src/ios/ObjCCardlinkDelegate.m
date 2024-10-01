@@ -69,6 +69,7 @@
     if (cardLinkPluginObject != nil && onErrorCallbackId != nil) {
         NSDictionary* errorResponse = @{ @"message": message };
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:errorResponse];
+        [pluginResult setKeepCallback:YES];
         
         [cardLinkPluginObject.commandDelegate sendPluginResult:pluginResult callbackId:onErrorCallbackId];
     }
