@@ -43,6 +43,7 @@ public class CardlinkPlugin extends CordovaPlugin {
             String smsTextTemplate = args.getString(2);
             String smsTextReassignmentTemplate = args.getString(3);
 
+            // TODO remove smsTextTemplate and smsTextReassignmentTemplate logic
             if (phoneNumber != null && smsSenderId != null && smsTextTemplate != null && smsTextReassignmentTemplate != null) {
                 this.requestSmsToken(phoneNumber, smsSenderId, smsTextTemplate, smsTextReassignmentTemplate, callbackContext);
             } else {

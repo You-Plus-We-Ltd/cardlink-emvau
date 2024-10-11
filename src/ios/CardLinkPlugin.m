@@ -108,10 +108,11 @@ static NSString* OnErrorCallbackId = nil;
         CDVPluginResult* pluginResult = nil;
         NSString *phoneNumber = [command.arguments objectAtIndex:0];
         NSString *smsSenderId = [command.arguments objectAtIndex:1];
-        NSString *smsTextTemplate = [command.arguments objectAtIndex:2];
-        NSString *smsTextReassignmentTemplate = [command.arguments objectAtIndex:3];
+        // NSString *smsTextTemplate = [command.arguments objectAtIndex:2];
+        // NSString *smsTextReassignmentTemplate = [command.arguments objectAtIndex:3];
         
-        if (smsSenderId != nil && [smsSenderId length] > 0 && smsSenderId != nil && [smsSenderId length] > 0 && smsTextTemplate != nil && [smsTextTemplate length] > 0 && smsTextReassignmentTemplate != nil && [smsTextReassignmentTemplate length] > 0) {
+        // TODO remove smsTextTemplate and smsTextReassignmentTemplate logic
+        if (smsSenderId != nil && [smsSenderId length] > 0 && smsSenderId != nil && [smsSenderId length] > 0 && smsTextTemplate != nil && smsTextReassignmentTemplate != nil) {
             [CSDKCardlink.shared requestSmsTokenWithPhoneNumber:phoneNumber
                 smsSenderId:smsSenderId
                 smsTextTemplate:smsTextTemplate
