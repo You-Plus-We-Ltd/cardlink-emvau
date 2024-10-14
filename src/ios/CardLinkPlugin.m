@@ -211,13 +211,13 @@ static NSString* OnErrorCallbackId = nil;
 - (void)onPrescriptionTokens:(CDVInvokedUrlCommand *)command
 {
     [CardLinkPlugin setCardLinkPluginObject:self];
-    [CardLinkPlugin setOnProgressUpdateCallbackId:command.callbackId];
+    [CardLinkPlugin setonPrescriptionTokensCallbackId:command.callbackId];
 }
 
 - (void)onPrescriptionBundles:(CDVInvokedUrlCommand *)command
 {
     [CardLinkPlugin setCardLinkPluginObject:self];
-    [CardLinkPlugin setOnProgressUpdateCallbackId:command.callbackId];
+    [CardLinkPlugin setOnPrescriptionBundlesCallbackId:command.callbackId];
 }
 
 - (void)onError:(CDVInvokedUrlCommand *)command
