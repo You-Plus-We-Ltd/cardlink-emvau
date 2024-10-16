@@ -159,7 +159,7 @@ static NSString* OnErrorCallbackId = nil;
         
         if (can != nil && [can length] > 0) {
             [CSDKCardlink.shared startScanWithMessage:@"Scaning..." can:can];
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"starting scan"];
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[NSString stringWithFormat:@"%@ %@", @"starting scan with can", can]];
         } else {
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
         }
