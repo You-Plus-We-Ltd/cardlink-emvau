@@ -74,7 +74,9 @@ class ICardlinkCallbackObject implements ICardlinkCallback {
         if (CardlinkPlugin.onErrorCallback != null) {
             try {
                 JSONObject resultObject = new JSONObject();
+                resultObject.put("error", error);
                 resultObject.put("message", message);
+                resultObject.put("action", action);
 
                 this.sendPluginResult(CardlinkPlugin.onErrorCallback, PluginResult.Status.OK, resultObject);
             } catch(JSONException e) {
