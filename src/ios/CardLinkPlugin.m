@@ -156,7 +156,7 @@ static NSString* OnErrorCallbackId = nil;
     [self.commandDelegate runInBackground:^{
         CDVPluginResult* pluginResult = nil;
         NSString* can = [command.arguments objectAtIndex:0];
-        NSString* message = @"Scaning...";
+        NSString* message = @"Scanning...";
         
         if (can != nil && [can length] > 0) {
             [CSDKCardlink.shared startScanWithMessage:message can:can];
