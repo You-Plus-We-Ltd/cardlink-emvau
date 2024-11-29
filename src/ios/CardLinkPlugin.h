@@ -1,6 +1,11 @@
 #import <Cordova/CDVPlugin.h>
+#import "ObjCCardlinkDelegate.h"
 
 @interface CardLinkPlugin : CDVPlugin
+
++ (ObjCCardlinkDelegate*)objCCardlinkDelegate;
+
++ (void)setObjCCardlinkDelegate:(ObjCCardlinkDelegate*)newObjCCardlinkDelegate;
 
 + (CardLinkPlugin*)cardLinkPluginObject;
 

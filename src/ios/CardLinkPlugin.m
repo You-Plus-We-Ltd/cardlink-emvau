@@ -4,6 +4,7 @@
 #import <CardlinkSDK/CardlinkSDK.h>
 
 static CardLinkPlugin* cardLinkPluginObject = nil;
+static ObjCCardlinkDelegate* objCCardlinkDelegate = nil;
 static NSString* OnStateChangedCallbackId = nil;
 static NSString* OnProgressUpdateCallbackId = nil;
 static NSString* OnPrescriptionTokensCallbackId = nil;
@@ -11,6 +12,16 @@ static NSString* OnPrescriptionBundlesCallbackId = nil;
 static NSString* OnErrorCallbackId = nil;
 
 @implementation CardLinkPlugin
+
++ (ObjCCardlinkDelegate*)objCCardlinkDelegate
+{
+    return objCCardlinkDelegate;
+}
+
++ (void)setObjCCardlinkDelegate:(ObjCCardlinkDelegate*)newObjCCardlinkDelegate
+{
+    objCCardlinkDelegate = newObjCCardlinkDelegate;
+}
 
 + (CardLinkPlugin*)cardLinkPluginObject
 {
@@ -90,6 +101,11 @@ static NSString* OnErrorCallbackId = nil;
         CDVPluginResult* pluginResult = nil;
         NSString* cardlinkServerUrl = [command.arguments objectAtIndex:0];
         NSString* authToken = [command.arguments objectAtIndex:1];
+        [CardLinkPlugin setCardLinkPluginObject:self];
+        
+        if (objCCardlinkDelegate == nil) {
+            [CardLinkPlugin setObjCCardlinkDelegate:[[ObjCCardlinkDelegate alloc] init]];
+        }
         
         if (cardlinkServerUrl != nil && [cardlinkServerUrl length] > 0 && authToken != nil && [authToken length] > 0) {
             [CSDKCardlink.shared initializeWithCardlinkServerUrl:cardlinkServerUrl delegate:[[ObjCCardlinkDelegate alloc] init] authToken:authToken];
