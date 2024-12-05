@@ -2,20 +2,59 @@
 #import <CardlinkSDK/CardlinkSDK.h>
 #import "CardlinkPlugin.h"
 
+static NSTimer* timer = nil;
+
 @implementation ObjCCardlinkDelegate
 
-- (void)cardlinkDidChangeState:(CSDKCardlinkState *)state
+- (void) doResult:(NSTimer *)timer
 {
+    NSDictionary* userInfo = timer.userInfo;
+    NSString* stateName = userInfo[@"stateName"];
     CardLinkPlugin* cardLinkPluginObject = [CardLinkPlugin cardLinkPluginObject];
     NSString* onStateChangedCallbackId = [CardLinkPlugin onStateChangedCallbackId];
     CDVPluginResult* pluginResult = nil;
+    NSMutableArray* passedIds = [CardLinkPlugin passedIds];
     
-    if (cardLinkPluginObject != nil && onStateChangedCallbackId != nil) {
-        NSDictionary* stateResponse = @{ @"state": [state name] };
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:stateResponse];
-        
-        [cardLinkPluginObject.commandDelegate sendPluginResult:pluginResult callbackId:onStateChangedCallbackId];
+    if (passedIds == nil) {
+        passedIds = [[NSMutableArray alloc] init];
     }
+    
+    NSLog(@"TEST-DEBUG: State changed %@ callbackId: %@ passedIds length %lu", stateName, onStateChangedCallbackId, [passedIds count]);
+    
+    if (![passedIds containsObject:onStateChangedCallbackId]) {
+        NSLog(@"EST-DEBUG inside %@", onStateChangedCallbackId);
+        [passedIds addObject:onStateChangedCallbackId];
+        if (cardLinkPluginObject != nil && onStateChangedCallbackId != nil) {
+            NSDictionary* stateResponse = @{ @"state": stateName, @"callbackId": onStateChangedCallbackId };
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:stateResponse];
+            [cardLinkPluginObject.commandDelegate sendPluginResult:pluginResult callbackId:onStateChangedCallbackId];
+        }
+        [CardLinkPlugin setPassedIds: passedIds];
+        [timer invalidate];
+        timer = nil;
+    }
+}
+
+- (void)cardlinkDidChangeState:(CSDKCardlinkState *)state
+{
+//    CardLinkPlugin* cardLinkPluginObject = [CardLinkPlugin cardLinkPluginObject];
+//    NSString* onStateChangedCallbackId = [CardLinkPlugin onStateChangedCallbackId];
+//    CDVPluginResult* pluginResult = nil;
+    
+//    NSLog(@"TEST-DEBUG: State changed %@ callbackId: %@", [state name], onStateChangedCallbackId);
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval:0.100
+                                             target:self
+                                           selector:@selector(doResult:)
+
+                                           userInfo:@{@"stateName": [state name]}
+                                            repeats:YES];
+    
+//    if (cardLinkPluginObject != nil && onStateChangedCallbackId != nil) {
+//        NSDictionary* stateResponse = @{ @"state": [state name], @"callbackId": onStateChangedCallbackId };
+//        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:stateResponse];
+//        [cardLinkPluginObject.commandDelegate sendPluginResult:pluginResult callbackId:onStateChangedCallbackId];
+//    }
 }
 
 - (void)cardlinkDidUpdateProgress:(int32_t)progress
@@ -46,7 +85,7 @@
     }
 }
 
-- (void)cardlinkDidFetchPrescriptionBundles:(NSArray<NSString *> *)bundles
+- (void)cardlinkDidFetchPrescriptionBundles:(NSArray<NSString > )bundles
 {
     CardLinkPlugin* cardLinkPluginObject = [CardLinkPlugin cardLinkPluginObject];
     NSString* onPrescriptionBundlesCallbackId = [CardLinkPlugin onPrescriptionBundlesCallbackId];
@@ -60,7 +99,7 @@
     }
 }
 
-- (void)cardlinkDidEncounterError:(CSDKCardlinkError *)error message:(NSString *)message expectedAction:(CSDKCardlinkAction *)expectedAction
+- (void)cardlinkDidEncounterError:(CSDKCardlinkError )error message:(NSString )message expectedAction:(CSDKCardlinkAction *)expectedAction
 {
     CardLinkPlugin* cardLinkPluginObject = [CardLinkPlugin cardLinkPluginObject];
     NSString* onErrorCallbackId = [CardLinkPlugin onErrorCallbackId];

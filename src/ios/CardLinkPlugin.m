@@ -10,8 +10,19 @@ static NSString* OnProgressUpdateCallbackId = nil;
 static NSString* OnPrescriptionTokensCallbackId = nil;
 static NSString* OnPrescriptionBundlesCallbackId = nil;
 static NSString* OnErrorCallbackId = nil;
+static NSMutableArray* PassedIds = nil;
 
 @implementation CardLinkPlugin
+
++ (NSMutableArray*) passedIds
+{
+    return PassedIds;
+}
+
++ (void)setPassedIds:(NSMutableArray *)newPassedIds
+{
+    PassedIds = newPassedIds;
+}
 
 + (ObjCCardlinkDelegate*)objCCardlinkDelegate
 {
@@ -42,6 +53,9 @@ static NSString* OnErrorCallbackId = nil;
 
 + (void)setOnStateChangedCallbackId:(NSString*)newOnStateChangedCallbackId
 {
+    NSLog(@"TEST-DEBUG: OnStateChangedCallbackId  %@", OnStateChangedCallbackId);
+    NSLog(@"TEST-DEBUG: newOnStateChangedCallbackId  %@", newOnStateChangedCallbackId);
+    NSLog(@"TEST-DEBUG: -------------------------------------------");
     if (OnStateChangedCallbackId != newOnStateChangedCallbackId) {
         OnStateChangedCallbackId = newOnStateChangedCallbackId;
     }
@@ -103,9 +117,9 @@ static NSString* OnErrorCallbackId = nil;
         NSString* authToken = [command.arguments objectAtIndex:1];
         [CardLinkPlugin setCardLinkPluginObject:self];
         
-        if (objCCardlinkDelegate == nil) {
+        // if (objCCardlinkDelegate == nil) {
             [CardLinkPlugin setObjCCardlinkDelegate:[[ObjCCardlinkDelegate alloc] init]];
-        }
+        /// }
         
         if (cardlinkServerUrl != nil && [cardlinkServerUrl length] > 0 && authToken != nil && [authToken length] > 0) {
             [CSDKCardlink.shared initializeWithCardlinkServerUrl:cardlinkServerUrl delegate:[[ObjCCardlinkDelegate alloc] init] authToken:authToken];

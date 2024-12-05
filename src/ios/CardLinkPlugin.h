@@ -3,6 +3,10 @@
 
 @interface CardLinkPlugin : CDVPlugin
 
++ (NSMutableArray*) passedIds;
+
++ (void) setPassedIds:(NSMutableArray*)newPassedIds;
+
 + (ObjCCardlinkDelegate*)objCCardlinkDelegate;
 
 + (void)setObjCCardlinkDelegate:(ObjCCardlinkDelegate*)newObjCCardlinkDelegate;
