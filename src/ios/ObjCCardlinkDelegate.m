@@ -85,7 +85,7 @@ static NSTimer* timer = nil;
     }
 }
 
-- (void)cardlinkDidFetchPrescriptionBundles:(NSArray<NSString > )bundles
+- (void)cardlinkDidFetchPrescriptionBundles:(NSArray<NSString *> *)bundles
 {
     CardLinkPlugin* cardLinkPluginObject = [CardLinkPlugin cardLinkPluginObject];
     NSString* onPrescriptionBundlesCallbackId = [CardLinkPlugin onPrescriptionBundlesCallbackId];
@@ -99,7 +99,7 @@ static NSTimer* timer = nil;
     }
 }
 
-- (void)cardlinkDidEncounterError:(CSDKCardlinkError )error message:(NSString )message expectedAction:(CSDKCardlinkAction *)expectedAction
+- (void)cardlinkDidEncounterError:(CSDKCardlinkError *)error message:(NSString *)message expectedAction:(CSDKCardlinkAction *)expectedAction
 {
     CardLinkPlugin* cardLinkPluginObject = [CardLinkPlugin cardLinkPluginObject];
     NSString* onErrorCallbackId = [CardLinkPlugin onErrorCallbackId];
