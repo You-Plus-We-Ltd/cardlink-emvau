@@ -199,6 +199,19 @@ static NSMutableArray* PassedIds = nil;
     }];
 }
 
+- (void)stopScan:(CDVInvokedUrlCommand*)command
+{
+    [self.commandDelegate runInBackground:^{
+        CDVPluginResult* pluginResult = nil;
+        
+        [CSDKCardlink.shared stopScan];
+
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"scan stopped"];
+        
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }];
+}
+
 - (void)updateNfcMessage:(CDVInvokedUrlCommand*)command
 {
     [self.commandDelegate runInBackground:^{

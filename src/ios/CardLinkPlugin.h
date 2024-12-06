@@ -41,6 +41,8 @@
 
 - (void)startScan:(CDVInvokedUrlCommand*)command;
 
+- (void)stopScan:(CDVInvokedUrlCommand*)command;
+
 - (void)updateNfcMessage:(CDVInvokedUrlCommand*)command;
 
 - (void)shutdown:(CDVInvokedUrlCommand*)command;
