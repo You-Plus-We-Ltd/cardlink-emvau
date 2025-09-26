@@ -192,6 +192,9 @@ public class CardlinkPlugin extends CordovaPlugin {
 
     private void onStateChanged(CallbackContext callbackContext) {
         CardlinkPlugin.onStateChangedCallback = callbackContext;
+        PluginResult pending = new PluginResult(PluginResult.Status.NO_RESULT);
+        pending.setKeepCallback(true);
+        CardlinkPlugin.onStateChangedCallback.sendPluginResult(pending);
     }
 
     private void onProgressUpdate(CallbackContext callbackContext) {

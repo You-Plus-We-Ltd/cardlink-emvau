@@ -61,10 +61,35 @@ function Cardlink() {
         }
     }
 
-    this.onStateChanged = function () {
-        return new Promise((resolve, reject) => {
-            cordova.exec(resolve, reject, "CardlinkPlugin", "onStateChanged", []);
-        });
+    this.stateListeners = [];
+    this.subscribed = false;
+
+    function startSubscription() {
+        if (!this.subscribed) {
+            return;
+        }
+
+        cordova.exec(
+            (result) => {
+                this.stateListeners.forEach((fn) => fn({
+                    success: true,
+                    result: result
+                }));
+            }, (error) => {
+                this.stateListeners.forEach((fn) => fn({
+                    success: false,
+                    error: error
+                }));
+            },
+            "CardlinkPlugin",
+            "onStateChanged",
+            []
+        );
+    }
+
+    this.onStateChanged = function (fn) {
+        this.stateListeners.push(fn);
+        startSubscription();
     }
 
     this.onProgressUpdate = function () {
