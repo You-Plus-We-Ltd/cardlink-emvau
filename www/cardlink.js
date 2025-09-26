@@ -74,11 +74,13 @@ function Cardlink() {
 
         cordova.exec(
             (result) => {
+                console.log("state changed", result, stateListeners);
                 stateListeners.forEach((fn) => fn({
                     success: true,
                     result: result
                 }));
             }, (error) => {
+                console.log("state changed error", error, stateListeners);
                 stateListeners.forEach((fn) => fn({
                     success: false,
                     error: error
