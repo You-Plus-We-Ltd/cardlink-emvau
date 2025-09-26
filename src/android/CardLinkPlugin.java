@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import de.akquinet.health.service.cardlink.sdk.Cardlink;
 import de.akquinet.health.service.cardlink.sdk.LogLevel;
 import org.apache.cordova.plugin.ICardlinkCallbackObject;
+import org.apache.cordova.PluginResult;
 
 /**
 * This class echoes a string called from JavaScript.
