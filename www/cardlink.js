@@ -61,8 +61,8 @@ function Cardlink() {
         }
     }
 
-    this.stateListeners = [];
-    this.subscribed = false;
+    var stateListeners = [];
+    var subscribed = false;
 
     function startSubscription() {
         if (!subscribed) {
