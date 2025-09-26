@@ -91,7 +91,7 @@ function Cardlink() {
     }
 
     this.onStateChanged = function (fn) {
-        this.stateListeners.push(fn);
+        stateListeners.push(fn);
         startSubscription();
     }
 
