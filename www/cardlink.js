@@ -65,18 +65,21 @@ function Cardlink() {
     this.subscribed = false;
 
     function startSubscription() {
-        if (!this.subscribed) {
+        if (!subscribed) {
             return;
         }
 
+        subscribed = true;
+        console.log("start subscription", stateListeners);
+
         cordova.exec(
             (result) => {
-                this.stateListeners.forEach((fn) => fn({
+                stateListeners.forEach((fn) => fn({
                     success: true,
                     result: result
                 }));
             }, (error) => {
-                this.stateListeners.forEach((fn) => fn({
+                stateListeners.forEach((fn) => fn({
                     success: false,
                     error: error
                 }));
