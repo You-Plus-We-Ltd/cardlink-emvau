@@ -61,7 +61,7 @@ function Cardlink() {
         }
     }
 
-    var stateListeners = [];
+    var stateListeners  = new Set();;
     var subscribed = false;
 
     function startSubscription() {
@@ -94,7 +94,7 @@ function Cardlink() {
 
     this.onStateChanged = function (fn) {
         console.log("register state listener", fn);
-        stateListeners.push(fn);
+        stateListeners.add(fn);
         startSubscription();
     }
 
