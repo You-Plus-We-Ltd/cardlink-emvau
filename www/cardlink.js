@@ -65,7 +65,7 @@ function Cardlink() {
     var subscribed = false;
 
     function startSubscription() {
-        if (!subscribed) {
+        if (subscribed) {
             return;
         }
 
