@@ -244,6 +244,11 @@ static NSMutableArray* PassedIds = nil;
 {
     [CardLinkPlugin setCardLinkPluginObject:self];
     [CardLinkPlugin setOnStateChangedCallbackId:command.callbackId];
+
+    CDVPluginResult *pending = [CDVPluginResult resultWithStatus:CDVCommandStatus_NO_RESULT];
+    [pending setKeepCallbackAsBool:YES];
+    
+    [self.commandDelegate sendPluginResult:pending callbackId:self.eventCallbackId];
 }
 
 - (void)onProgressUpdate:(CDVInvokedUrlCommand *)command
