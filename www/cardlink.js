@@ -61,43 +61,43 @@ function Cardlink() {
         }
     }
 
-    // var stateListeners = [];
-    // var subscribed = false;
+    var stateListeners = [];
+    var subscribed = false;
 
-    // function startSubscription() {
-    //     if (subscribed) {
-    //         return;
-    //     }
+    function startSubscription() {
+        if (subscribed) {
+            return;
+        }
 
-    //     subscribed = true;
-    //     console.log("start subscription", stateListeners);
+        subscribed = true;
+        console.log("start subscription", stateListeners);
 
-    //     cordova.exec(
-    //         (result) => {
-    //             console.log("state changed", result, stateListeners);
-    //             stateListeners.forEach((fn) => fn({
-    //                 success: true,
-    //                 result: result
-    //             }));
-    //         }, (error) => {
-    //             console.log("state changed error", error, stateListeners);
-    //             stateListeners.forEach((fn) => fn({
-    //                 success: false,
-    //                 error: error
-    //             }));
-    //         },
-    //         "CardlinkPlugin",
-    //         "onStateChanged",
-    //         []
-    //     );
-    // }
+        cordova.exec(
+            (result) => {
+                console.log("state changed", result, stateListeners);
+                stateListeners.forEach((fn) => fn({
+                    success: true,
+                    result: result
+                }));
+            }, (error) => {
+                console.log("state changed error", error, stateListeners);
+                stateListeners.forEach((fn) => fn({
+                    success: false,
+                    error: error
+                }));
+            },
+            "CardlinkPlugin",
+            "onStateChanged",
+            []
+        );
+    }
 
     this.onStateChanged = function (fn) {
         console.log("register state listener", fn);
-        // if (!stateListeners.includes(fn)) {
-        //     stateListeners.push(fn);
-        //     startSubscription();
-        // }
+        if (!stateListeners.includes(fn)) {
+            stateListeners.push(fn);
+            startSubscription();
+        }
     }
 
     this.onProgressUpdate = function () {
