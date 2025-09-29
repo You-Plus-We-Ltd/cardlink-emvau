@@ -94,10 +94,8 @@ function Cardlink() {
 
     this.onStateChanged = function (fn) {
         console.log("register state listener", fn);
-        if (!stateListeners.includes(fn)) {
-            stateListeners.push(fn);
-            startSubscription();
-        }
+        stateListeners.push(fn);
+        startSubscription();
     }
 
     this.onProgressUpdate = function () {
@@ -144,6 +142,11 @@ function Cardlink() {
             cordova.exec(resolve, reject, "CardlinkPlugin", "setLogLevel", [logLevel]);
         });
     }
+
+    this.clearData = function () {
+        stateListeners = [];
+        subscribed = false;
+    };
 }
 
 
