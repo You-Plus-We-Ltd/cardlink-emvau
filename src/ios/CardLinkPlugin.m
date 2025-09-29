@@ -248,7 +248,7 @@ static NSMutableArray* PassedIds = nil;
     CDVPluginResult *pending = [CDVPluginResult resultWithStatus:CDVCommandStatus_NO_RESULT];
     [pending setKeepCallbackAsBool:YES];
     
-    [self.commandDelegate sendPluginResult:pending callbackId:self.eventCallbackId];
+    [self.commandDelegate sendPluginResult:pending callbackId:command.callbackId];
 }
 
 - (void)onProgressUpdate:(CDVInvokedUrlCommand *)command
