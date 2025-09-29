@@ -47,9 +47,10 @@ function Cardlink() {
     }
 
     this.shutdown = function () {
+        console.log("shutdown called");
         stateListeners = [];
         subscribed = false;
-        
+
         return new Promise((resolve, reject) => {
             cordova.exec(resolve, reject, "CardlinkPlugin", "shutdown", []);
         });
