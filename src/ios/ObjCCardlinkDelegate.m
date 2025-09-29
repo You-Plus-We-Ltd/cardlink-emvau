@@ -52,8 +52,8 @@ static NSTimer* timer = nil;
     
    if (cardLinkPluginObject != nil && onStateChangedCallbackId != nil) {
        NSDictionary* stateResponse = @{ @"state": [state name], @"callbackId": onStateChangedCallbackId };
-       [pluginResult setKeepCallbackAsBool:YES];
        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:stateResponse];
+       [pluginResult setKeepCallbackAsBool:YES];
        [cardLinkPluginObject.commandDelegate sendPluginResult:pluginResult callbackId:onStateChangedCallbackId];
    }
 }
