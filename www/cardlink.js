@@ -48,6 +48,8 @@ function Cardlink() {
 
     this.shutdown = function () {
         return new Promise((resolve, reject) => {
+            stateListeners = [];
+            subscribed = false;
             cordova.exec(resolve, reject, "CardlinkPlugin", "shutdown", []);
         });
     }
@@ -142,11 +144,6 @@ function Cardlink() {
             cordova.exec(resolve, reject, "CardlinkPlugin", "setLogLevel", [logLevel]);
         });
     }
-
-    this.clearData = function () {
-        stateListeners = [];
-        subscribed = false;
-    };
 }
 
 
